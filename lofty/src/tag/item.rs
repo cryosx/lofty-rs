@@ -4,6 +4,8 @@ use crate::tag::TagType;
 use std::borrow::Cow;
 use std::collections::HashMap;
 
+use strum_macros::IntoStaticStr;
+
 macro_rules! first_key {
 	($key:tt $(| $remaining:expr)*) => {
 		$key
@@ -428,7 +430,7 @@ macro_rules! gen_item_keys {
 			$(,)?
 		]
 	) => {
-		#[derive(PartialEq, Clone, Debug, Eq, Hash)]
+		#[derive(PartialEq, Clone, Debug, Eq, Hash, IntoStaticStr)]
 		#[allow(missing_docs)]
 		#[non_exhaustive]
 		/// A generic representation of a tag's key
@@ -719,7 +721,7 @@ gen_item_keys!(
 );
 
 /// Represents a tag item's value
-#[derive(Clone, Debug, PartialEq, Eq, Hash)]
+#[derive(Clone, Debug, PartialEq, Eq, Hash, IntoStaticStr)]
 pub enum ItemValue {
 	/// Any UTF-8 encoded text
 	Text(String),
