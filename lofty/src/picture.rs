@@ -12,6 +12,8 @@ use std::io::{Cursor, Read, Seek, SeekFrom};
 use byteorder::{BigEndian, ReadBytesExt as _};
 use data_encoding::BASE64;
 
+use strum_macros::IntoStaticStr;
+
 /// Common picture item keys for APE
 pub const APE_PICTURE_TYPES: [&str; 21] = [
 	"Cover Art (Other)",
@@ -38,7 +40,7 @@ pub const APE_PICTURE_TYPES: [&str; 21] = [
 ];
 
 /// MIME types for pictures.
-#[derive(Debug, Clone, Eq, PartialEq, Hash)]
+#[derive(Debug, Clone, Eq, PartialEq, Hash, IntoStaticStr)]
 #[non_exhaustive]
 pub enum MimeType {
 	/// PNG image
@@ -110,7 +112,7 @@ impl Display for MimeType {
 
 /// The picture type, according to ID3v2 APIC
 #[allow(missing_docs)]
-#[derive(Debug, Clone, Copy, Eq, PartialEq, Hash)]
+#[derive(Debug, Clone, Copy, Eq, PartialEq, Hash, IntoStaticStr)]
 #[non_exhaustive]
 pub enum PictureType {
 	Other,
